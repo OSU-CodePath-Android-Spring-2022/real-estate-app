@@ -11,7 +11,7 @@ Original App Design Project - README Template
 
 ## Overview
 ### Description
-[Description of your app]
+Android mobile application that will allow users to sign in to an account and then using a desired location parameter will be able to view and gain information regarding real estate properties that fit their desired parameter. User will also be able to view additional screens to include property descriptions and details provided from the listing agent's brokerage.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
