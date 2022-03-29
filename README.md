@@ -34,8 +34,8 @@ Original App Design Project - README Template
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Users are able to add comments about a listing in a comment box.
+* When viewing the details for a listing, user is able to be redirected to the listing agents website so that they may contact them about listing.
 
 ### 2. Screen Archetypes
 
