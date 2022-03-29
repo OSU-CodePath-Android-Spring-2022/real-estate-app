@@ -28,8 +28,9 @@ Original App Design Project - README Template
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Users can enter an address they are curious about and the app will show them related listings within that town and/or other parameter.
+* User can save and create lists of the properties they have viewed and add to their “wish list"
+* User is able to click on a listing and it will bring them to a new screen that contains the specific details about that property.
 
 **Optional Nice-to-have Stories**
 
