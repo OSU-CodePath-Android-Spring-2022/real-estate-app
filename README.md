@@ -64,8 +64,7 @@ Android mobile application that will allow users to sign in to an account and th
    * ...
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="assets/handsketched-wireframes.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
