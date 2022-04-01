@@ -15,12 +15,12 @@ Android mobile application that will allow users to sign in to an account and th
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Category:** House & Homes 
+- **Mobile:** This app would be developed for mobile but the functionality would also be possible on a computer, such as Zillow, Realtor.com, or other similar apps. The mobile app is appealing for when the user is out looking at different properties and need to look at addresses or is interested in comparing property details on the spot. 
+- **Story:** Lets users find listings of properties in their desired area, view the listing details, and save the properties to their wishlist.
+- **Market:** Anyone looking to find a property to buy could find this app useful. Anyone interested in knowing house prices around them could find this app useful.
+- **Habit:** The user would be compelled to use this app on a regular basis, especially if they are actively looking to buy.
+- **Scope:** We would be able to complete this app in one month. We would start with the basic funtionality of the app first and then move in to the optional stories if we have time.
 
 ## Product Spec
 
