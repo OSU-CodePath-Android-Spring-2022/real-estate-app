@@ -50,18 +50,29 @@ Android mobile application that will allow users to sign in to an account and th
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
-* [fill out your third tab]
+* Search
+* Wishlist
+* Results
+* Signout
 
 **Flow Navigation** (Screen to Screen)
 
-* [list first screen here]
-   * [list screen navigation here]
-   * ...
-* [list second screen here]
-   * [list screen navigation here]
-   * ...
+* Login Page
+   * Log In -> Sign up if not login is known
+   * Log In -> Search
+  
+* Search
+   * search homes (after inputting address) -> Results
+   
+* Results
+  * heart -> adds to Wishlist
+  * tap home picture -> goes to Details screen which contains more pictures, price, and additional info
+
+* Wishlist
+  * Contains all homes that were put on the wishlist by the user
+
+* Sign Out
+  * Sign Out -> Login Page
 
 ## Wireframes
 <img src="assets/handsketched-wireframes.jpg" width=600>
