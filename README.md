@@ -39,12 +39,23 @@ Android mobile application that will allow users to sign in to an account and th
 
 ### 2. Screen Archetypes
 
-* [list first screen here]
-   * [list associated required story here]
-   * ...
-* [list second screen here]
-   * [list associated required story here]
-   * ...
+* Login Screen - main screen if user is not logged in
+   * Upon opening the app for the first time or after logging out, the user is taken to the login screen.
+   * Login allows user to access data associated with their account (such as their wishlist).
+   * If they do not have an account, user should be prompted to navigate to the register screen.
+* Register Screen - can be accessed via a link or button at the bottom of the login screen
+   * Similar to the login screen, but allows users to sign up for an account using their name, email, and password.
+* Search Screen - main screen upon login
+   * Upon entering an address, user will be navigated to a results screen.
+* Results Screen - can be accessed by making a search or previous results can be seen by tapping the results tab
+   * Allows user to view the results of their search (if any are found).
+   * A listing includes data such as price, bedrooms, sq. footage, and photos.
+   * Allows users to add a listing to their wishlist.
+   * Allows user to see more details about a listing by tapping it.
+* Detail Screen - can be accessed by tapping a listing in the results screen
+   * Displays an expanded view of details about a property.
+* Wishlist Screen - can be accessed by tapping the tab
+   * Displays listings that were saved by the user.
 
 ### 3. Navigation
 
