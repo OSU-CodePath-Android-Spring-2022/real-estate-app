@@ -5,9 +5,9 @@ Original App Design Project - README Template
 
 ## Table of Contents
 1. [Overview](#Overview)
-1. [Product Spec](#Product-Spec)
-1. [Wireframes](#Wireframes)
-2. [Schema](#Schema)
+2. [Product Spec](#Product-Spec)
+3. [Wireframes](#Wireframes)
+4. [Schema](#Schema)
 
 ## Overview
 ### Description
@@ -99,4 +99,11 @@ Android mobile application that will allow users to sign in to an account and th
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+
+### Existing API Endpoints
+US Real Estate API
+- Base URL - [https://rapidapi.com/datascraper/api/us-real-estate/](https://rapidapi.com/datascraper/api/us-real-estate/)
+
+| HTTP Verb | Endpoint | Description |
+| --------- | -------- | ----------- |
+| GET | /v2/for-sale/?city=city&state_code=state_code&limit=limit&offset=offset | Get homes for sale given a city, state, limit on results returned, and results offset
