@@ -186,10 +186,10 @@ Android mobile application that will allow users to sign in to an account and th
   ```
 * Results Screen and Details Screen
   * (Create/POST) Add new listing object to store property details
-  * (Update/PUT) Add a listing or remove a listing from the user's wishlist
+  * (Update/PUT) Add a listing ID or remove a listing ID from the user's wishlist
 * Wishlist Screen
-  * (Read/GET) Query all listings in the user's wishlist
-  * (Update/PUT) Remove a listing from the user's wishlist
+  * (Read/GET) Query all listing objects with the IDs in the user's wishlist
+  * (Update/PUT) Remove a listing ID from the user's wishlist
 
 ### Existing API Endpoints
 US Real Estate API
