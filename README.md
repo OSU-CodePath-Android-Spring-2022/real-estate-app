@@ -139,9 +139,9 @@ Android mobile application that will allow users to sign in to an account and th
             } else {
                 e.printStackTrace()
                 Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show()
-            }})
-        )
-    }
+              }})
+          )
+      }
    ```
 * Signup Screen
   * (Create/POST) Registers a new user object
@@ -164,9 +164,9 @@ Android mobile application that will allow users to sign in to an account and th
                 // to figure out what went wrong
                 e.printStackTrace()
                 Toast.makeText(this, "Error signing up", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+              }
+          }
+      }
     ```
 * Search Screen
   * (Read/GET) Queries US Real Estate API for homes on sale near given address
@@ -182,7 +182,7 @@ Android mobile application that will allow users to sign in to an account and th
         .build()
 
       val response = client.newCall(request).execute()
-  }
+    }
   ```
 * Results Screen and Details Screen
   * (Create/POST) Add new listing object to store property details
