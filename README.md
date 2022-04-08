@@ -186,12 +186,11 @@ Android mobile application that will allow users to sign in to an account and th
   ```
 * Results Screen and Details Screen
   * (Create/POST) Add new listing object to store property details
-  * (Update/PUT) Add a listing to the user's wishlist
-  * (Delete/DELETE) Remove a listing from the user's wishlist
+  * (Update/PUT) Add a listing or remove a listing from the user's wishlist
 * Wishlist Screen
   * (Read/GET) Query all listings in the user's wishlist
-  * (Delete/DELETE) Remove a listing from the user's wishlist 
-  
+  * (Update/PUT) Remove a listing from the user's wishlist
+
 ### Existing API Endpoints
 US Real Estate API
 - Base URL - [https://rapidapi.com/datascraper/api/us-real-estate/](https://rapidapi.com/datascraper/api/us-real-estate/)
