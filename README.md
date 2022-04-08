@@ -170,6 +170,18 @@ Android mobile application that will allow users to sign in to an account and th
     ```
 * Search Screen
   * (Read/GET) Queries US Real Estate API for homes on sale near given address
+  ```
+  val client = OkHttpClient()
+
+  val request = Request.Builder()
+    .url("https://us-real-estate.p.rapidapi.com/v2/for-sale?offset=0&limit=42&state_code=MI&city=Detroit&sort=newest")
+    .get()
+    .addHeader("X-RapidAPI-Host", "us-real-estate.p.rapidapi.com")
+    .addHeader("X-RapidAPI-Key", "318a58784emsh066d9c1dc428aebp16adfejsnae96b9c83a63")
+    .build()
+  
+  val response = client.newCall(request).execute()
+  ```
 * Results Screen and Details Screen
   * (Create/POST) Add new listing object to store property details
   * (Update/PUT) Add a listing to the user's wishlist
