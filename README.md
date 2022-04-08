@@ -95,7 +95,38 @@ Android mobile application that will allow users to sign in to an account and th
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### Post
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | propertyId    | String   | unique id for the property, pulled from API |
+   | primaryPhoto  | String   | URL for main photo of property |
+   | photos        | Array    | array of URL strings for photos of property |
+   | listPrice     | Number   | price of property |
+   | yearBuilt     | Number   | year property was built |
+   | baths         | Number   | number of bathrooms |
+   | stories       | Number   | number of stories|
+   | beds          | Number   | number of bedrooms|
+   | type          | String   | type of property |
+   | sqft          | Number   | square footage of property |
+   | lotSqft       | Number   | square footage of property lot |
+   | postalCode    | String   | property's zip code |
+   | city          | String   | property's city |
+   | stateCode     | String   | property's state |
+   | streetAddr    | String   | street address of property |
+   | savedAt       | DateTime | date when property was saved (default field) |
+
+#### User
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | userId        | String   | unique id for the user (default field) |
+   | username      | String   | username |
+   | password      | String   | password |
+   | wishlist      | Array    | an array that holds strings of property IDs the user saved |
+   | createdAt     | DateTime | date when user was created (default field) |
+   | updatedAt     | DateTime | date when user data was modified (default field) |
+   
 ### Networking
 * Login Screen
   * (Create/POST) Successful login creates a new session for existing user
