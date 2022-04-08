@@ -134,8 +134,7 @@ Android mobile application that will allow users to sign in to an account and th
       private fun loginUser(username: String, password: String) {
         ParseUser.logInInBackground(username, password, ({ user, e ->
             if (user != null) {
-                Log.i(TAG, "Successfully logged in user")
-                goToMainActivity()
+                Log.i(TAG, "Successfully logged in user ${username}")
             } else {
                 e.printStackTrace()
                 Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show()
@@ -147,21 +146,16 @@ Android mobile application that will allow users to sign in to an account and th
   * (Create/POST) Registers a new user object
   ```
       private fun signupUser(username: String, password: String) {
-        // Create the ParseUser
         val user = ParseUser()
 
-        // Set fields for the user to be created
         user.setUsername(username)
         user.setPassword(password)
 
         user.signUpInBackground { e ->
             if (e == null) {
-                // Hooray! Let them use the app now.
-                Log.i(TAG, "Successfully signed up user")
+                Log.i(TAG, "Successfully signed up user ${username}")
                 Toast.makeText(this, "${username} successfully registered", Toast.LENGTH_SHORT).show()
             } else {
-                // Sign up didn't succeed. Look at the ParseException
-                // to figure out what went wrong
                 e.printStackTrace()
                 Toast.makeText(this, "Error signing up", Toast.LENGTH_SHORT).show()
               }
