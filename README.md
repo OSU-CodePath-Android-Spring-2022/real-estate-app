@@ -97,9 +97,20 @@ Android mobile application that will allow users to sign in to an account and th
 ### Models
 [Add table of models]
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-
+* Login Screen
+  * (Create/POST) Successful login creates a new session for existing user
+* Signup Screen
+  * (Create/POST) Registers a new user object
+* Search Screen
+  * (Read/GET) Queries US Real Estate API for homes on sale near given address
+* Results Screen and Details Screen
+  * (Create/POST) Add new listing object to store property details
+  * (Update/PUT) Add a listing to the user's wishlist
+  * (Delete/DELETE) Remove a listing from the user's wishlist
+* Wishlist Screen
+  * (Read/GET) Query all listings in the user's wishlist
+  * (Delete/DELETE) Remove a listing from the user's wishlist 
+  
 ### Existing API Endpoints
 US Real Estate API
 - Base URL - [https://rapidapi.com/datascraper/api/us-real-estate/](https://rapidapi.com/datascraper/api/us-real-estate/)
