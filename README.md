@@ -130,6 +130,19 @@ Android mobile application that will allow users to sign in to an account and th
 ### Networking
 * Login Screen
   * (Create/POST) Successful login creates a new session for existing user
+  ```
+      private fun loginUser(username: String, password: String) {
+        ParseUser.logInInBackground(username, password, ({ user, e ->
+            if (user != null) {
+                Log.i(TAG, "Successfully logged in user")
+                goToMainActivity()
+            } else {
+                e.printStackTrace()
+                Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show()
+            }})
+        )
+    }
+   ```
 * Signup Screen
   * (Create/POST) Registers a new user object
 * Search Screen
