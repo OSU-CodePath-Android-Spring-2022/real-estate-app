@@ -145,6 +145,29 @@ Android mobile application that will allow users to sign in to an account and th
    ```
 * Signup Screen
   * (Create/POST) Registers a new user object
+  ```
+      private fun signupUser(username: String, password: String) {
+        // Create the ParseUser
+        val user = ParseUser()
+
+        // Set fields for the user to be created
+        user.setUsername(username)
+        user.setPassword(password)
+
+        user.signUpInBackground { e ->
+            if (e == null) {
+                // Hooray! Let them use the app now.
+                Log.i(TAG, "Successfully signed up user")
+                Toast.makeText(this, "${username} successfully registered", Toast.LENGTH_SHORT).show()
+            } else {
+                // Sign up didn't succeed. Look at the ParseException
+                // to figure out what went wrong
+                e.printStackTrace()
+                Toast.makeText(this, "Error signing up", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    ```
 * Search Screen
   * (Read/GET) Queries US Real Estate API for homes on sale near given address
 * Results Screen and Details Screen
