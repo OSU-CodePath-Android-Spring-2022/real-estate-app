@@ -14,7 +14,6 @@ Original App Design Project - README Template
 Android mobile application that will allow users to sign in to an account and then using a desired location parameter will be able to view and gain information regarding real estate properties that fit their desired parameter. User will also be able to view additional screens to include property descriptions and details provided from the listing agent's brokerage.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
 - **Category:** House & Homes 
 - **Mobile:** This app would be developed for mobile but the functionality would also be possible on a computer, such as Zillow, Realtor.com, or other similar apps. The mobile app is appealing for when the user is out looking at different properties and need to look at addresses or is interested in comparing property details on the spot. 
 - **Story:** Lets users find listings of properties in their desired area, view the listing details, and save the properties to their wishlist.
@@ -35,8 +34,8 @@ Android mobile application that will allow users to sign in to an account and th
 
 **Optional Nice-to-have Stories**
 
-* Users are able to add comments about a listing in a comment box.
-* When viewing the details for a listing, user is able to be redirected to the listing agents website so that they may contact them about listing.
+- [ ] Users are able to add comments about a listing in a comment box.
+- [ ] When viewing the details for a listing, user is able to be redirected to the listing agents website so that they may contact them about listing.
 
 ### 2. Screen Archetypes
 
