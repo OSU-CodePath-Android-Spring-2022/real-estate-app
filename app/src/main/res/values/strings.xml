@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Real Estate App</string>
+    <string name="search_text">Enter an address below:</string>
+    <string name="search_button">Search Homes</string>
 </resources>
