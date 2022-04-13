@@ -14,8 +14,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        if (ParseUser.getCurrentUser() != null) {
-            goToSearchActivity()
+        val wasAppJustLaunched = getIntent().getBooleanExtra("wasAppJustLaunched", true)
+
+        if (ParseUser.getCurrentUser() != null && wasAppJustLaunched) {
+            goToMainActivity()
         }
 
         findViewById<Button>(R.id.login_button).setOnClickListener {
@@ -33,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         ParseUser.logInInBackground(username, password, ({ user, e ->
             if (user != null) {
                 Log.i(TAG, "Successfully logged in")
-                goToSearchActivity()
+                goToMainActivity()
             } else {
                 e.printStackTrace()
                 Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show()
@@ -41,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
-    private fun goToSearchActivity() {
-        val intent = Intent(this@LoginActivity, SearchActivity::class.java)
+    private fun goToMainActivity() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
