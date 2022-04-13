@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_newUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_newPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
@@ -28,38 +28,51 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_username" />
+        app:layout_constraintTop_toBottomOf="@+id/et_newUsername" />
 
-    <Button
-        android:id="@+id/login_button"
+    <EditText
+        android:id="@+id/et_newEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:width="200dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textNoAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_newPassword" />
 
     <Button
-        android:id="@+id/to_signup"
+        android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textHasAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_newEmail"/>
+
+    <Button
+        android:id="@+id/to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+         />
 
     <TextView
-        android:id="@+id/textNoAccount"
+        android:id="@+id/textHasAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account?"
+        android:text="Already have an account?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/to_signup"
-         />
+        app:layout_constraintBottom_toTopOf="@+id/to_login"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

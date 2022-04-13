@@ -24,10 +24,8 @@ class LoginActivity : AppCompatActivity() {
             loginUser(username, password)
         }
 
-        findViewById<Button>(R.id.signupBtn).setOnClickListener {
-            val username = findViewById<EditText>(R.id.et_username).text.toString()
-            val password = findViewById<EditText>(R.id.et_password).text.toString()
-            signUpUser(username, password)
+        findViewById<Button>(R.id.to_signup).setOnClickListener {
+            goToSignupActivity()
         }
     }
 
@@ -43,27 +41,14 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
-    private fun signUpUser(username: String, password: String) {
-        // Create the ParseUser
-        val user = ParseUser()
-
-        // Set fields for the user to be created
-        user.setUsername(username)
-        user.setPassword(password)
-
-        user.signUpInBackground { e ->
-            if (e == null) {
-                goToSearchActivity()
-                Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
-            } else {
-                e.printStackTrace()
-                Toast.makeText(this, "Sign up unsuccessful", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun goToSearchActivity() {
         val intent = Intent(this@LoginActivity, SearchActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToSignupActivity() {
+        val intent = Intent(this@LoginActivity, SignupActivity::class.java)
         startActivity(intent)
         finish()
     }
