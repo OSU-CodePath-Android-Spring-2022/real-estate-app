@@ -1,42 +1,49 @@
 package com.example.realestateapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.example.realestateapp.fragments.LoginFragment
+import com.example.realestateapp.fragments.ResultsFragment
+import com.example.realestateapp.fragments.SearchFragment
+import com.example.realestateapp.fragments.WishlistFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        val fragmentManager: FragmentManager = supportFragmentManager
+        lateinit var fragmentToShow: Fragment
+
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener {
             item ->
+
             when (item.itemId) {
                 R.id.action_search -> {
                     // todo: navigate to the search screen
-                    Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+                    fragmentToShow = SearchFragment()
                 }
                 R.id.action_results -> {
                     // todo: navigate to the results screen
-                    Toast.makeText(this, "Results", Toast.LENGTH_SHORT).show()
+                    fragmentToShow = ResultsFragment()
                 }
                 R.id.action_wishlist -> {
                     // todo: navigate to the wishlist screen
-                    Toast.makeText(this, "Wishlist", Toast.LENGTH_SHORT).show()
+                    fragmentToShow = WishlistFragment()
                 }
                 R.id.action_signout -> {
-                    // todo: navigate to the sign out screen
-                    Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
+                    // todo: navigate to the login screen
+                    fragmentToShow = LoginFragment()
                 }
             }
+            fragmentManager.beginTransaction().replace(R.id.flContainer, fragmentToShow).commit()
             true
         }
-    }
-
-    fun startSearchActivity(view: View) {
-        val intent = Intent(this, SearchActivity::class.java)
-        startActivity(intent)
+        // Set default fragment to show
+        bottomNavigationView.selectedItemId = R.id.action_search
     }
 }
