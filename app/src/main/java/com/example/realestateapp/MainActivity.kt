@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToLoginScreen() {
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
-        intent.putExtra("didUserLogOut", true)
+        intent.putExtra("wasAppJustLaunched", false)
         startActivity(intent)
         finish()
     }

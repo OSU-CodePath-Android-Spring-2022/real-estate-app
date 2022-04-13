@@ -55,6 +55,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun goToLoginActivity() {
         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+        intent.putExtra("wasAppJustLaunched", false)
         startActivity(intent)
         finish()
     }
