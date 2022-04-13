@@ -2,4 +2,8 @@
     <string name="app_name">Real Estate App</string>
     <string name="search_text">Enter an address below:</string>
     <string name="search_button">Search Homes</string>
+    <string name="search">Search</string>
+    <string name="results">Results</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
