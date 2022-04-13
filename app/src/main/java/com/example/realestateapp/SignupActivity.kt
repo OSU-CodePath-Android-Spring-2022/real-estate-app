@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.realestateapp.fragments.SearchFragment
 import com.parse.ParseUser
 
 class SignupActivity : AppCompatActivity() {
@@ -37,7 +38,7 @@ class SignupActivity : AppCompatActivity() {
 
         user.signUpInBackground { e ->
             if (e == null) {
-                goToSearchActivity()
+                goToMainActivity()
                 Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
             } else {
                 e.printStackTrace()
@@ -46,8 +47,8 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToSearchActivity() {
-        val intent = Intent(this@SignupActivity, SearchActivity::class.java)
+    private fun goToMainActivity() {
+        val intent = Intent(this@SignupActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
