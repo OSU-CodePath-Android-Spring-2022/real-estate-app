@@ -3,21 +3,22 @@ package com.example.realestateapp.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 @Parcelize
 data class Listing(
     var propertyID: String,
+    var listPrice: Int,
     var primaryPhoto: String,
     var photos: MutableList<String> = mutableListOf(),
-    var listPrice: Int,
     var yearBuilt: Int,
     var baths: Int,
     var stories: Int,
     var beds: Int,
-    var type: String,
     var sqft: Int,
     var lotSqft: Int,
+    var type: String,
     var postalCode: String,
     var city: String,
     var stateCode: String,
@@ -38,16 +39,16 @@ data class Listing(
             val addressJson = listingJson.getJSONObject("location").getJSONObject("address")
             return Listing (
                 listingJson.getString("property_id"),
+                listingJson.getInt("list_price"),
                 listingJson.getJSONObject("primary_photo").getString("href"),
                 parsePhotosJsonArray(listingJson.getJSONArray("photos")),
-                listingJson.getInt("list_price"),
-                descriptionJson.getInt("year_built"),
-                descriptionJson.getInt("baths"),
-                descriptionJson.getInt("stories"),
-                descriptionJson.getInt("beds"),
+                handleNullDescription(descriptionJson, "year_built"),
+                handleNullDescription(descriptionJson, "baths"),
+                handleNullDescription(descriptionJson, "stories"),
+                handleNullDescription(descriptionJson, "beds"),
+                handleNullDescription(descriptionJson, "sqft"),
+                handleNullDescription(descriptionJson, "lot_sqft"),
                 descriptionJson.getString("type"),
-                descriptionJson.getInt("sqft"),
-                descriptionJson.getInt("lot_sqft"),
                 addressJson.getString("postal_code"),
                 addressJson.getString("city"),
                 addressJson.getString("state_code"),
@@ -62,6 +63,14 @@ data class Listing(
                 photos.add(photoJson.getString("href"))
             }
             return photos
+        }
+
+        fun handleNullDescription(descriptionJson: JSONObject, key: String): Int {
+            try {
+                return descriptionJson.getInt(key)
+            } catch (error: JSONException) {
+                return -1
+            }
         }
     }
 }
