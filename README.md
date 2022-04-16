@@ -210,9 +210,8 @@ US Real Estate API
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
-
 Sprint-1 Build Progress:
+
 <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-1.gif' title='Signup Video' width=''>
 
 
