@@ -212,10 +212,9 @@ US Real Estate API
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/signup.gif' title='Signup Video' width=''>
-<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/login.gif' title='Login Video' width=''>
-<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/logout.gif' title='Logout Video' width=''>
-<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/bottom-nav.gif' title='Signup Video' width=''>
+Sprint-1 Build Progress:
+<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-1.gif' title='Signup Video' width=''>
+
 
 GIF created with [ScreenToGif](https://www.screentogif.com/).
 
