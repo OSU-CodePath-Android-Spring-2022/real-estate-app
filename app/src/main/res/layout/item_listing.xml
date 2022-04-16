@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivListingPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivListingPhoto" />
+
+    <TextView
+        android:id="@+id/tvBedCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 bds"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvPrice"
+        app:layout_constraintTop_toBottomOf="@+id/ivListingPhoto" />
+
+    <TextView
+        android:id="@+id/tvBathCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 ba"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvBedCount"
+        app:layout_constraintTop_toBottomOf="@+id/ivListingPhoto" />
+
+    <TextView
+        android:id="@+id/tvSqFt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000 sqft"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvBathCount"
+        app:layout_constraintTop_toBottomOf="@+id/ivListingPhoto" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000 Street Name, City, State ZipCode"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
