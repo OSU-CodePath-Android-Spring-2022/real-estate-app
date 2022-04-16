@@ -1,15 +1,24 @@
 package com.example.realestateapp.fragments
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.codepath.asynchttpclient.AsyncHttpClient
+import com.codepath.asynchttpclient.RequestHeaders
+import com.codepath.asynchttpclient.RequestParams
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.R
+import okhttp3.Headers
+import org.json.JSONException
 
 class SearchFragment : Fragment() {
+
+    private val client = AsyncHttpClient()
+    private val headers = RequestHeaders()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,5 +30,43 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Button>(R.id.btnSearch).setOnClickListener {
+            getSearchResults()
+        }
+        headers.put("X-RapidAPI-Host", getString(R.string.rapid_api_host))
+        headers.put("X-RapidAPI-Key", getString(R.string.rapid_api_key))
+    }
+
+    fun getSearchResults() {
+        val params = RequestParams()
+        params.put("offset", "0")
+        params.put("limit", "42")
+        params.put("state_code", "MI")
+        params.put("city", "Detroit")
+        params.put("sort", "newest")
+
+        client.get(getString(R.string.rapid_api_endpoint), headers, params, object: JsonHttpResponseHandler() {
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Headers?,
+                response: String?,
+                throwable: Throwable?
+            ) {
+                Log.e(TAG, "onFailure $statusCode")
+            }
+
+            override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {
+                Log.i(TAG, "onSuccess: JSON data $json")
+                try {
+                } catch (e: JSONException) {
+                    Log.e(TAG, "Encountered exception $e")
+                }
+            }
+        })
+    }
+
+    companion object {
+        const val TAG = "SearchFragment"
     }
 }

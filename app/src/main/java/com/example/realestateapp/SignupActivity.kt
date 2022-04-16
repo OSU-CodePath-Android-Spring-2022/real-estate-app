@@ -3,11 +3,9 @@ package com.example.realestateapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.realestateapp.fragments.SearchFragment
 import com.parse.ParseUser
 
 class SignupActivity : AppCompatActivity() {
