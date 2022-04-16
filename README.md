@@ -27,7 +27,9 @@ Android mobile application that will allow users to sign in to an account and th
 
 **Required Must-have Stories**
 
-- [x] Users can sign up for a new account or log into an existing account.
+- [x] Users can sign up for a new account, log in to an existing account, and log out from the app.
+  - [x] Users can sign up for a new account. 
+        <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/signup.gif' title='Signup Video' width=''>
 - [ ] Users can enter an address they are curious about and the app will show them related listings within that town and/or other parameter.
 - [ ] User can save and create lists of the properties they have viewed and add to their “wish list"
 - [ ] User is able to click on a listing and it will bring them to a new screen that contains the specific details about that property.
