@@ -48,10 +48,10 @@ data class Listing(
                 descriptionJson.getString("type"),
                 descriptionJson.getInt("sqft"),
                 descriptionJson.getInt("lot_sqft"),
-                addressJson.getString("postalCode"),
+                addressJson.getString("postal_code"),
                 addressJson.getString("city"),
-                addressJson.getString("stateCode"),
-                addressJson.getString("streetAddr")
+                addressJson.getString("state_code"),
+                addressJson.getString("line")
             )
         }
 
