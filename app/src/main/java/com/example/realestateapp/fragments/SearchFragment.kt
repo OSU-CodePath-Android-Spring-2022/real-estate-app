@@ -12,6 +12,7 @@ import com.codepath.asynchttpclient.RequestHeaders
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.R
+import com.example.realestateapp.models.Listing
 import okhttp3.Headers
 import org.json.JSONException
 
@@ -19,6 +20,7 @@ class SearchFragment : Fragment() {
 
     private val client = AsyncHttpClient()
     private val headers = RequestHeaders()
+    private val listings = mutableListOf<Listing>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +53,10 @@ class SearchFragment : Fragment() {
             override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {
                 Log.i(TAG, "onSuccess: JSON data $json")
                 try {
+                    val dataJson = json.jsonObject.getJSONObject("data")
+                    val listingJsonArray = dataJson.getJSONObject("home_search").getJSONArray("results")
+                    listings.addAll(Listing.fromJsonArray(listingJsonArray))
+                    Log.i(TAG, "Listing list $listings")
                 } catch (e: JSONException) {
                     Log.e(TAG, "Encountered exception $e")
                 }
