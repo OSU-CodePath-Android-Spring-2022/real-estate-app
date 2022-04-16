@@ -214,7 +214,6 @@ Sprint-1 Build Progress:
 
 <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-1.gif' title='Signup Video' width=''>
 
-
 GIF created with [ScreenToGif](https://www.screentogif.com/).
 
 
