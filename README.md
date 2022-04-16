@@ -27,10 +27,25 @@ Android mobile application that will allow users to sign in to an account and th
 
 **Required Must-have Stories**
 
-- [ ] Users can sign up for a new account or log into an existing account.
+- [x] Users can sign up for a new account using Parse authentication.
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/signup.gif' title='Signup Video' width=''>
+      </details>
+- [x] Users can log in and log out of his/her account. 
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/login.gif' title='Login Video' width=''>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/logout.gif' title='Logout Video' width=''>
+      </details>
 - [ ] Users can enter an address they are curious about and the app will show them related listings within that town and/or other parameter.
-- [ ] User can save and create lists of the properties they have viewed and add to their “wish list"
-- [ ] User is able to click on a listing and it will bring them to a new screen that contains the specific details about that property.
+- [ ] Users can save and create lists of the properties they have viewed and add to their “wish list".
+- [ ] Users are able to click on a listing to bring them to a new screen that contains the specific details about that property.
+- [x] Users can switch between the search, results, and wishlist tabs using fragmments and a Bottom Navigation View.
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/bottom-nav.gif' title='Signup Video' width=''>
+      </details>
 
 **Optional Nice-to-have Stories**
 
@@ -192,3 +207,16 @@ US Real Estate API
 | HTTP Verb | Endpoint | Description |
 | --------- | -------- | ----------- |
 | GET | /v2/for-sale/?city=city&state_code=state_code&limit=limit&offset=offset | Get homes for sale given a city, state, limit on results returned, and results offset
+
+## Video Walkthrough
+
+Sprint-1 Build Progress:
+
+<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-1.gif' title='Signup Video' width=''>
+
+GIF created with [ScreenToGif](https://www.screentogif.com/).
+
+
+## Open-source libraries used
+
+- [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
