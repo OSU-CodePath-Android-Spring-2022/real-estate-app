@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import androidx.fragment.app.activityViewModels
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestHeaders
 import com.codepath.asynchttpclient.RequestParams
@@ -14,14 +16,19 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.MainActivity
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
+import com.example.realestateapp.models.SharedViewModel
 import okhttp3.Headers
 import org.json.JSONException
 
 class SearchFragment : Fragment() {
-
     private val client = AsyncHttpClient()
     private val headers = RequestHeaders()
     private val listings = mutableListOf<Listing>()
+
+    lateinit var etSearchQuery: EditText
+    lateinit var btnTest: Button
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +40,17 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        etSearchQuery = view.findViewById(R.id.etSearchQuery)
+        btnTest = view.findViewById(R.id.btnTest)
+
+        sharedViewModel.city.observe(viewLifecycleOwner, { city ->
+            etSearchQuery.setText(city)
+        })
+
+        btnTest.setOnClickListener {
+            sharedViewModel.saveCity(etSearchQuery.text.toString())
+        }
 
         view.findViewById<Button>(R.id.btnSearch).setOnClickListener {
             getSearchResults()
