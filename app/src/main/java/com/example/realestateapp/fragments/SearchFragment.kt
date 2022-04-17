@@ -11,6 +11,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestHeaders
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.example.realestateapp.MainActivity
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import okhttp3.Headers
@@ -48,6 +49,7 @@ class SearchFragment : Fragment() {
         params.put("state_code", "MI")
         params.put("city", "Detroit")
         params.put("sort", "newest")
+        params.put("property_type", "multi_family,single_family")
 
         client.get(getString(R.string.rapid_api_endpoint), headers, params, object: JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {

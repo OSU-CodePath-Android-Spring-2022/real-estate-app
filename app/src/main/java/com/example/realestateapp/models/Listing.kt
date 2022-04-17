@@ -40,8 +40,8 @@ data class Listing(
             return Listing (
                 listingJson.getString("property_id"),
                 listingJson.getInt("list_price"),
-                listingJson.getJSONObject("primary_photo").getString("href"),
-                parsePhotosJsonArray(listingJson.getJSONArray("photos")),
+                handleNullPrimaryPhoto(listingJson),
+                parsePhotosJsonArray(listingJson),
                 handleNullDescription(descriptionJson, "year_built"),
                 handleNullDescription(descriptionJson, "baths"),
                 handleNullDescription(descriptionJson, "stories"),
@@ -56,13 +56,18 @@ data class Listing(
             )
         }
 
-        fun parsePhotosJsonArray(jsonArray: JSONArray): MutableList<String> {
+        fun parsePhotosJsonArray(listingJson: JSONObject): MutableList<String> {
             val photos = mutableListOf<String>()
-            for (i in 0 until jsonArray.length()) {
-                val photoJson = jsonArray.getJSONObject(i)
-                photos.add(photoJson.getString("href"))
+            try {
+                val jsonArray = listingJson.getJSONArray("photos")
+                for (i in 0 until jsonArray.length()) {
+                    val photoJson = jsonArray.getJSONObject(i)
+                    photos.add(photoJson.getString("href"))
+                }
+                return photos
+            } catch (error: JSONException) {
+                return photos
             }
-            return photos
         }
 
         fun handleNullDescription(descriptionJson: JSONObject, key: String): Int {
@@ -70,6 +75,14 @@ data class Listing(
                 return descriptionJson.getInt(key)
             } catch (error: JSONException) {
                 return -1
+            }
+        }
+
+        fun handleNullPrimaryPhoto(listingJson: JSONObject): String {
+            try {
+                return listingJson.getJSONObject("primary_photo").getString("href")
+            } catch (error: JSONException) {
+                return ""
             }
         }
     }
