@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.realestateapp.models.Listing
 
 class ListingAdapter(val context: Context, val listings: List<Listing>)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
@@ -44,12 +45,12 @@ class ListingAdapter(val context: Context, val listings: List<Listing>)
         }
 
         fun bind(listing: Listing) {
-            Glide.with(itemView.context).load(listing.getImage()?.url).into(ivListingPhoto)
-            tvPrice.text = listing.getPrice()
-            tvBedCount.text = listing.getBedCount()
-            tvBathCount.text = listing.getBathCount()
-            tvSqFt.text = listing.getSqFt()
-            tvAddress.text = listing.getAddress()
+            Glide.with(itemView.context).load(listing.primaryPhoto).into(ivListingPhoto)
+            tvPrice.text = listing.listPrice.toString()
+            tvBedCount.text = listing.beds.toString()
+            tvBathCount.text = listing.baths.toString()
+            tvSqFt.text = listing.sqft.toString()
+            tvAddress.text = listing.streetAddr
         }
     }
 }
