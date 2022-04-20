@@ -1,6 +1,9 @@
 package com.example.realestateapp
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,11 +58,11 @@ class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
         }
 
         fun bind(listing: Listing) {
-            Glide.with(itemView.context).load(listing.primaryPhoto).into(ivListingPhoto)
-            tvPrice.text = "$" + listing.listPrice.toString()
-            tvBedCount.text = listing.beds.toString() + "bds"
-            tvBathCount.text = listing.baths.toString() + "ba"
-            tvSqFt.text = listing.sqft.toString() + "sqft"
+            Glide.with(itemView.context).load(listing.primaryPhoto).error(ColorDrawable(Color.LTGRAY)).into(ivListingPhoto)
+            tvPrice.text = "$" + String.format("%,d", listing.listPrice)
+            tvBedCount.text = listing.beds.toString() + " bds"
+            tvBathCount.text = listing.baths.toString() + " ba"
+            tvSqFt.text = listing.sqft.toString() + " sqft"
             tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
         }
     }
