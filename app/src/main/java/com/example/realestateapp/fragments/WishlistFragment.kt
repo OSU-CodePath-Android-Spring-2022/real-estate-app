@@ -15,8 +15,6 @@ import com.example.realestateapp.models.SharedViewModel
 
 class WishlistFragment : Fragment() {
 
-    lateinit var tvListings: TextView
-
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -30,10 +28,6 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvListings = view.findViewById(R.id.tvListings)
-
-        sharedViewModel.listings.observe(viewLifecycleOwner) { listings ->
-            tvListings.text = listings.toString()
-        }
+        sharedViewModel.listings.observe(viewLifecycleOwner) {}
     }
 }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
 
-class ListingAdapter(val context: Context, val listings: List<Listing>)
+class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.ViewHolder {
@@ -27,7 +27,17 @@ class ListingAdapter(val context: Context, val listings: List<Listing>)
         return listings.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun clear() {
+        listings.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addAll(listingList: MutableList<Listing>) {
+        listings.addAll(listingList)
+        notifyDataSetChanged()
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -46,11 +56,11 @@ class ListingAdapter(val context: Context, val listings: List<Listing>)
 
         fun bind(listing: Listing) {
             Glide.with(itemView.context).load(listing.primaryPhoto).into(ivListingPhoto)
-            tvPrice.text = listing.listPrice.toString()
-            tvBedCount.text = listing.beds.toString()
-            tvBathCount.text = listing.baths.toString()
-            tvSqFt.text = listing.sqft.toString()
-            tvAddress.text = listing.streetAddr
+            tvPrice.text = "$" + listing.listPrice.toString()
+            tvBedCount.text = listing.beds.toString() + "bds"
+            tvBathCount.text = listing.baths.toString() + "ba"
+            tvSqFt.text = listing.sqft.toString() + "sqft"
+            tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
         }
     }
 }
