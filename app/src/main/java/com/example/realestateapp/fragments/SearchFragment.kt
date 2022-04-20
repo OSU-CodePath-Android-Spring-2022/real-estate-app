@@ -26,7 +26,7 @@ class SearchFragment : Fragment() {
     private val listings = mutableListOf<Listing>()
 
     lateinit var etSearchQuery: EditText
-    lateinit var btnTest: Button
+    lateinit var btnSearch: Button
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -42,17 +42,13 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         etSearchQuery = view.findViewById(R.id.etSearchQuery)
-        btnTest = view.findViewById(R.id.btnTest)
+        btnSearch = view.findViewById(R.id.btnSearch)
 
-        sharedViewModel.city.observe(viewLifecycleOwner, { city ->
-            etSearchQuery.setText(city)
-        })
-
-        btnTest.setOnClickListener {
-            sharedViewModel.saveCity(etSearchQuery.text.toString())
+        sharedViewModel.listings.observe(viewLifecycleOwner) {
+            etSearchQuery.setText("")
         }
 
-        view.findViewById<Button>(R.id.btnSearch).setOnClickListener {
+        btnSearch.setOnClickListener {
             getSearchResults()
         }
 
@@ -76,6 +72,7 @@ class SearchFragment : Fragment() {
                     val dataJson = json.jsonObject.getJSONObject("data")
                     val listingJsonArray = dataJson.getJSONObject("home_search").getJSONArray("results")
                     listings.addAll(Listing.fromJsonArray(listingJsonArray))
+                    sharedViewModel.saveListings(listings)
                     Log.i(TAG, "Listing list $listings")
                 } catch (e: JSONException) {
                     Log.e(TAG, "Encountered exception $e")

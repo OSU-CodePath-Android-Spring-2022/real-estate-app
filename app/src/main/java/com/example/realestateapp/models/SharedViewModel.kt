@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel: ViewModel() {
 
-    private var _city = MutableLiveData("Chicago")
-    val city: LiveData<String> = _city
+    private var _listings = MutableLiveData<MutableList<Listing>>()
+    val listings: LiveData<MutableList<Listing>> = _listings
 
-    fun saveCity(newCity: String) {
-        _city.value = newCity
+    fun saveListings(newListings: MutableList<Listing>) {
+        _listings.value = newListings
     }
 }
