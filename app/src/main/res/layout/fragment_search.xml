@@ -21,7 +21,7 @@
         android:id="@+id/etCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="20dp"
         android:width="200dp"
         android:ems="10"
@@ -35,14 +35,16 @@
         android:id="@+id/etState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="20dp"
         android:width="80dp"
         android:ems="10"
         android:hint="state"
         android:inputType="textPersonName"
         android:maxLength="2"
         android:minHeight="50dp"
-        tools:layout_editor_absoluteX="266dp"
-        tools:layout_editor_absoluteY="211dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSearchText" />
 
     <Button
         android:id="@+id/btnSearch"

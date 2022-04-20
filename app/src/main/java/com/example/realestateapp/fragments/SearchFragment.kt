@@ -17,6 +17,7 @@ import com.example.realestateapp.MainActivity
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.Headers
 import org.json.JSONException
 
