@@ -19,29 +19,37 @@ import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.*
 import java.util.*
+import com.google.gson.Gson
 
 
 class WishlistFragment : Fragment() {
 
     fun queryWishlist() {
         val user = ParseUser.getCurrentUser()
-        val wishlist = user.getJSONArray("wishlist")
-        Log.i("wishlist test", wishlist.toString())
-//        val query: ParseQuery<ParseObject> = ParseQuery.getQuery("Listing")
-//        query.whereContainedIn("listingId", wishlist)
-//        query.findInBackground(object : FindCallback<ParseObject> {
-//            override fun done(listings: MutableList<ParseObject>?, e: ParseException?) {
-//                if (e != null) {
-//                    Log.e("wishlist", "Error fetching posts")
-//                } else {
-//                    if (listings != null) {
-//                        for (listing in listings) {
-//                            Log.i("listing", listing.getInt("listPrice").toString())
-//                        }
-//                    }
-//                }
-//            }
-//        })
+//        Log.i("wishlist test", "wishlist " + user.getJSONArray("wishlist"))
+        val wishlistJson = user.getJSONArray("wishlist")
+        val wishlist = mutableListOf<String>()
+        if (wishlistJson != null) {
+            for (i in 0 until wishlistJson.length()) {
+                val listingId = wishlistJson.getString(i)
+                wishlist.add(listingId)
+            }
+            val query: ParseQuery<ParseObject> = ParseQuery.getQuery("Listing")
+            query.whereContainedIn("listingId", wishlist)
+            query.findInBackground(object : FindCallback<ParseObject> {
+                override fun done(listings: MutableList<ParseObject>?, e: ParseException?) {
+                    if (e != null) {
+                        Log.e("wishlist", "Error fetching posts")
+                    } else {
+                        if (listings != null) {
+                            for (listing in listings) {
+                                Log.i("listing", listing.getInt("listPrice").toString())
+                            }
+                        }
+                    }
+                }
+            })
+        }
 
     }
 
@@ -50,7 +58,7 @@ class WishlistFragment : Fragment() {
 //    lateinit var adapter: ListingAdapter
 //    var wishlist: MutableList<Listing> = mutableListOf()
 //    private val sharedViewModel: SharedViewModel by activityViewModels()
-//
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,14 +70,14 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         queryWishlist()
-//        view.findViewById<RecyclerView>(R.id.rvWishlist)
+        view.findViewById<RecyclerView>(R.id.rvWishlist)
 
 //        rvWishlist = view.findViewById(R.id.rvWishlist)
 //        adapter = ListingAdapter(requireContext(),wishlist)
 //        rvWishlist.adapter = adapter
 //        rvWishlist.layoutManager = LinearLayoutManager(requireContext())
-//         get user's wishlist
-
+//
+//
 //        sharedViewModel.listings.observe(viewLifecycleOwner) {}
     }
 }
