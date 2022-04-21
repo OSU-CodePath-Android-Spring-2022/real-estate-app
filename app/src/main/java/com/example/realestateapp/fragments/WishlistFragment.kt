@@ -6,11 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-//import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+//import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realestateapp.ListingAdapter
 import com.example.realestateapp.ParseListing
@@ -24,9 +21,11 @@ import com.google.gson.Gson
 
 class WishlistFragment : Fragment() {
 
-    fun queryWishlist() {
+    var allWishlist: MutableList<Listing> = mutableListOf()
+    var listingsFromW: MutableList<Listing> = mutableListOf()
+
+    fun queryWishlist(adapter: ListingAdapter) {
         val user = ParseUser.getCurrentUser()
-//        Log.i("wishlist test", "wishlist " + user.getJSONArray("wishlist"))
         val wishlistJson = user.getJSONArray("wishlist")
         val wishlist = mutableListOf<String>()
         if (wishlistJson != null) {
@@ -42,9 +41,14 @@ class WishlistFragment : Fragment() {
                         Log.e("wishlist", "Error fetching posts")
                     } else {
                         if (listings != null) {
+                            var convertedListing: Listing
                             for (listing in listings) {
                                 Log.i("listing", listing.getInt("listPrice").toString())
+                                convertedListing = createListing(listing)
+                                listingsFromW.add(convertedListing)
                             }
+                            adapter.clear()
+                            adapter.addAll(listingsFromW)
                         }
                     }
                 }
@@ -53,11 +57,37 @@ class WishlistFragment : Fragment() {
 
     }
 
+    fun createListing(listing: ParseObject): Listing {
+        Log.i("createListing", listing.toString())
+        val propertyID = listing.getString("propertyId").toString()
+        val primaryPhoto = listing.getString("primaryPhoto").toString()
+        val photosJson = listing.getJSONArray("photos")
 
-//    lateinit var rvWishlist: RecyclerView
-//    lateinit var adapter: ListingAdapter
-//    var wishlist: MutableList<Listing> = mutableListOf()
-//    private val sharedViewModel: SharedViewModel by activityViewModels()
+        val photos = mutableListOf<String>()
+        if (photosJson  != null) {
+            for (i in 0 until photosJson.length()) {
+                val url = photosJson.getString(i)
+                photos.add(url)
+            }
+        }
+        val listPrice = listing.getInt("listPrice")
+        val yearBuilt = listing.getInt("yearBuilt")
+        val baths = listing.getInt("baths")
+        val stories = listing.getInt("stories")
+        val type = listing.getString("type").toString()
+        val beds = listing.getInt("beds")
+        val sqft = listing.getInt("sqft")
+        val lotSqft = listing.getInt("lotSqft")
+        val postalCode = listing.getString("postalCode").toString()
+        val city = listing.getString("city").toString()
+        val stateCode = listing.getString("stateCode").toString()
+        val streetAddr = listing.getString("streetAddr").toString()
+        val convertedListing = Listing(propertyID, listPrice, primaryPhoto, photos, yearBuilt, baths, stories, beds, sqft, lotSqft, type, postalCode, city, stateCode, streetAddr )
+        return convertedListing
+    }
+
+    lateinit var rvWishlist: RecyclerView
+    lateinit var adapter: ListingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,15 +99,16 @@ class WishlistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        queryWishlist()
+
+        Log.i("here", listingsFromW.toString())
         view.findViewById<RecyclerView>(R.id.rvWishlist)
 
-//        rvWishlist = view.findViewById(R.id.rvWishlist)
-//        adapter = ListingAdapter(requireContext(),wishlist)
-//        rvWishlist.adapter = adapter
-//        rvWishlist.layoutManager = LinearLayoutManager(requireContext())
-//
-//
-//        sharedViewModel.listings.observe(viewLifecycleOwner) {}
+        rvWishlist = view.findViewById(R.id.rvWishlist)
+        adapter = ListingAdapter(requireContext(),allWishlist)
+        rvWishlist.adapter = adapter
+        rvWishlist.layoutManager = LinearLayoutManager(requireContext())
+        queryWishlist(adapter)
+
+
     }
 }
