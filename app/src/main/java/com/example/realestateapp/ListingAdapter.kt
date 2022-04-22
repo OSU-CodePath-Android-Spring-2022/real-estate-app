@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
-import com.parse.ParseUser
+import com.parse.*
 import java.util.*
-import com.parse.ParseObject
 
 open class ListingAdapter(val context: Context, val listings: MutableList<Listing>, val sharedViewModel: SharedViewModel)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
@@ -66,7 +65,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             itemView.setOnClickListener(this)
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
-                saveWishlist()
+                saveToWishlist()
             }
         }
 
@@ -88,8 +87,34 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             sharedViewModel.saveListing(listings[adapterPosition])
         }
 
-        private fun saveWishlist() {
+        private fun saveToWishlist() {
             val property = listings[adapterPosition]
+            val listingId = property.propertyID
+            var savedIds = mutableListOf<String>()
+            var query: ParseQuery<ParseObject> = ParseQuery.getQuery("Listing")
+            val user = ParseUser.getCurrentUser()
+            user.addAllUnique("wishlist", Arrays.asList(listingId))
+            user.saveInBackground()
+            query.findInBackground(object : FindCallback<ParseObject> {
+                override fun done(savedListings: MutableList<ParseObject>?, e: ParseException?) {
+                    if (e != null) {
+                        Log.e("savedListings", "Error fetching posts")
+                    } else {
+                        if (savedListings != null) {
+                            for (i in 0 until savedListings.size) {
+                                savedIds.add(savedListings[i].getString("listingId").toString())
+                            }
+                            Log.i("savedListings", savedIds.toString())
+                        }
+                        if (listingId in savedIds != true) {
+                            saveParseObject(property)
+                        }
+                    }
+                }
+            })
+        }
+
+        fun saveParseObject(property: Listing){
             val parseListing = ParseObject.create("Listing")
             parseListing.put("listingId",property.propertyID)
             parseListing.put("primaryPhoto", property.primaryPhoto)
@@ -114,10 +139,6 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
                     Log.i("saving", "Successfully saved post")
                 }
             }
-
-            val user = ParseUser.getCurrentUser()
-            user.addAll("wishlist", Arrays.asList(property.propertyID))
-            user.saveInBackground()
         }
     }
 }
