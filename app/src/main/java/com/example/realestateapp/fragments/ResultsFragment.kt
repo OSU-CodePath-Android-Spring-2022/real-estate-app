@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,13 +38,19 @@ class ResultsFragment : Fragment() {
         view.findViewById<RecyclerView>(R.id.rvListings)
 
         rvListings = view.findViewById(R.id.rvListings)
-        adapter = ListingAdapter(requireContext(), allListings)
+        adapter = ListingAdapter(requireContext(), allListings, sharedViewModel)
         rvListings.adapter = adapter
         rvListings.layoutManager = LinearLayoutManager(requireContext())
 
         sharedViewModel.listings.observe(viewLifecycleOwner) { listings ->
             adapter.clear()
             adapter.addAll(listings)
+        }
+
+        // For DetailFragment
+        sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
+            Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
+            // TODO: Instead of toast, start a detail fragment displaying the currently selected listing
         }
     }
 

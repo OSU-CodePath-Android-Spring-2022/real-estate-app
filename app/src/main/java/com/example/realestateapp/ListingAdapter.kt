@@ -13,12 +13,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
+import com.example.realestateapp.models.SharedViewModel
 import com.parse.ParseUser
 import java.util.*
-import com.example.realestateapp.ParseListing
 import com.parse.ParseObject
 
-class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
+class ListingAdapter(val context: Context, val listings: MutableList<Listing>, val sharedViewModel: SharedViewModel)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.ViewHolder {
@@ -45,7 +45,7 @@ class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -61,9 +61,12 @@ class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
             tvBathCount = itemView.findViewById(R.id.tvBathCount)
             tvSqFt = itemView.findViewById(R.id.tvSqFt)
             tvAddress = itemView.findViewById(R.id.tvAddress)
+
+
+            itemView.setOnClickListener(this)
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
-                saveListing()
+                saveWishlist()
             }
         }
 
@@ -74,9 +77,18 @@ class ListingAdapter(val context: Context, val listings: MutableList<Listing>)
             tvBathCount.text = listing.baths.toString() + " ba"
             tvSqFt.text = listing.sqft.toString() + " sqft"
             tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
+
         }
 
-        private fun saveListing() {
+        override fun onClick(v: View?) {
+            // 1. Get notified of the particular movie which was clicked
+            val listing = listings[adapterPosition]
+
+            // 2. Use the intent system to navigate to the new activity
+            sharedViewModel.saveListing(listings[adapterPosition])
+        }
+
+        private fun saveWishlist() {
             val property = listings[adapterPosition]
             val parseListing = ParseObject.create("Listing")
             parseListing.put("listingId",property.propertyID)

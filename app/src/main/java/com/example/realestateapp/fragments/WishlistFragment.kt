@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 //import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ class WishlistFragment : Fragment() {
 
     var allWishlist: MutableList<Listing> = mutableListOf()
     var listingsFromW: MutableList<Listing> = mutableListOf()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     fun queryWishlist(adapter: ListingAdapter) {
         val user = ParseUser.getCurrentUser()
@@ -104,7 +106,7 @@ class WishlistFragment : Fragment() {
         view.findViewById<RecyclerView>(R.id.rvWishlist)
 
         rvWishlist = view.findViewById(R.id.rvWishlist)
-        adapter = ListingAdapter(requireContext(),allWishlist)
+        adapter = ListingAdapter(requireContext(),allWishlist, sharedViewModel)
         rvWishlist.adapter = adapter
         rvWishlist.layoutManager = LinearLayoutManager(requireContext())
         queryWishlist(adapter)
