@@ -10,16 +10,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.realestateapp.fragments.WishlistFragment
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.ParseUser
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import java.util.*
-import com.parse.ParseObject
-import com.example.realestateapp.fragments.WishlistFragment
+
 
 open class WishlistAdapter(val context: Context, val listings: MutableList<Listing>, val sharedViewModel: SharedViewModel)
     : RecyclerView.Adapter<WishlistAdapter.ViewHolder>() {
@@ -94,7 +96,6 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
         }
 
         private fun removeFromWishlist() {
-//            var fragmentTransaction: FragmentTransaction
             val property = listings[adapterPosition]
             var position = -1
             val user = ParseUser.getCurrentUser()
@@ -108,15 +109,9 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
                 wishlistJson.remove(position)
                 user.put("wishlist", wishlistJson)
                 user.saveInBackground()
+                listings.removeAt(adapterPosition)
                 notifyDataSetChanged()
             }
-//            fragmentManager.beginTransaction()
-//            val fragment = WishlistFragment()
-//            fragmentManager.detach(fragment)
-//            fragmentManager.attach(fragment)
-
-
-
         }
     }
 }
