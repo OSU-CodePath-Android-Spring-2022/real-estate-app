@@ -216,6 +216,11 @@ Sprint-1 Build Progress:
 
 GIF created with [ScreenToGif](https://www.screentogif.com/).
 
+Sprint-2 Build Progress:
+
+<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-2.gif' title='View Listings and Save/Remove from Wishlist' width=''>
+
+GIF created with [LICEcap](https://www.cockos.com/licecap/).
 
 ## Open-source libraries used
 
