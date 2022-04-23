@@ -38,10 +38,18 @@ Android mobile application that will allow users to sign in to an account and th
           <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/login.gif' title='Login Video' width=''>
           <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/logout.gif' title='Logout Video' width=''>
       </details>
-- [ ] Users can enter an address they are curious about and the app will show them related listings within that town and/or other parameter.
-- [ ] Users can save and create lists of the properties they have viewed and add to their “wish list".
+- [x] Users can enter an address they are curious about and the app will show them related listings within that town and/or other parameter.
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/search-by-address.gif' title='Search by Address Video' width=''>
+      </details>
+- [x] Users can save and create lists of the properties they have viewed and add to their "wish list".
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/save-to-wishlist.gif' title='Save to Wishlist Video' width=''>
+      </details>
 - [ ] Users are able to click on a listing to bring them to a new screen that contains the specific details about that property.
-- [x] Users can switch between the search, results, and wishlist tabs using fragmments and a Bottom Navigation View.
+- [x] Users can switch between the search, results, and wishlist tabs using fragments and a Bottom Navigation View.
       <details>
         <summary>Video Walkthrough</summary>
           <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/bottom-nav.gif' title='Signup Video' width=''>
