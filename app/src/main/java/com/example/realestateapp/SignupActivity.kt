@@ -18,9 +18,9 @@ class SignupActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.signupBtn).setOnClickListener {
-            val username = findViewById<EditText>(R.id.et_newUsername).text.toString()
-            val password = findViewById<EditText>(R.id.et_newPassword).text.toString()
-            val email = findViewById<EditText>(R.id.et_newEmail).text.toString()
+            val username = findViewById<EditText>(R.id.et_newUsername).text.toString().trim()
+            val password = findViewById<EditText>(R.id.et_newPassword).text.toString().trim()
+            val email = findViewById<EditText>(R.id.et_newEmail).text.toString().trim()
             signUpUser(username, password, email)
         }
     }
