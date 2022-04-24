@@ -3,11 +3,11 @@
     <!-- "Theme.MaterialComponents.DayNight.DarkActionBar" -->
     <style name="Theme.RealEstateApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_1</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@color/blue_1</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondary">@color/blue_1</item>
         <item name="colorSecondaryVariant">@color/blue_3</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
