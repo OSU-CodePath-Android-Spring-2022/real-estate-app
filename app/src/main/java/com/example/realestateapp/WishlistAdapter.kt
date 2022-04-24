@@ -86,9 +86,9 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
             tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
 
             // Display null data as N/A
-            var parameterList = listOf(listing.beds, listing.baths, listing.sqft)
-            var textViewList = listOf(tvBedCount, tvBathCount, tvSqFt)
-            var unitList = listOf(" bds", " ba", " sqft")
+            val parameterList = listOf(listing.beds, listing.baths, listing.sqft)
+            val textViewList = listOf(tvBedCount, tvBathCount, tvSqFt)
+            val unitList = listOf(" bds", " ba", " sqft")
 
             for (i in 0 until parameterList.size) {
                 if (parameterList[i] == -1) {
