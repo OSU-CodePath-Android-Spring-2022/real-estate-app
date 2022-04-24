@@ -9,6 +9,7 @@ import com.example.realestateapp.fragments.ResultsFragment
 import com.example.realestateapp.fragments.SearchFragment
 import com.example.realestateapp.fragments.WishlistFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.parse.ParseUser
 
 class MainActivity : AppCompatActivity() {
@@ -44,12 +45,23 @@ class MainActivity : AppCompatActivity() {
                     fragmentToShow = WishlistFragment()
                 }
                 R.id.action_signout -> {
-                    logoutUser()
+                    confirmLogout()
                 }
             }
             fragmentManager.beginTransaction().replace(R.id.flContainer, fragmentToShow).commit()
             true
         }
+    }
+
+    private fun confirmLogout() {
+        MaterialAlertDialogBuilder(this)
+            .setMessage("Are you sure you want to sign out?")
+            .setNegativeButton("Cancel") { dialog, which ->
+            }
+            .setPositiveButton("Confirm") { dialog, which ->
+                logoutUser()
+            }
+            .show()
     }
 
     private fun logoutUser() {
@@ -63,3 +75,4 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 }
+
