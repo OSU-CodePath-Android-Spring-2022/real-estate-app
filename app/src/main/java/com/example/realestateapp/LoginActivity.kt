@@ -14,9 +14,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val wasAppJustLaunched = getIntent().getBooleanExtra("wasAppJustLaunched", true)
-
-        if (ParseUser.getCurrentUser() != null && wasAppJustLaunched) {
+        if (ParseUser.getCurrentUser() != null) {
             goToMainActivity()
         }
 

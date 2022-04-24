@@ -44,7 +44,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
         notifyDataSetChanged()
     }
 
-    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -61,8 +61,8 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvSqFt = itemView.findViewById(R.id.tvSqFt)
             tvAddress = itemView.findViewById(R.id.tvAddress)
 
+            itemView.setOnLongClickListener(this)
 
-            itemView.setOnClickListener(this)
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
                 saveToWishlist()
@@ -77,14 +77,26 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvSqFt.text = listing.sqft.toString() + " sqft"
             tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
 
+            // Display null data as N/A
+            var parameterList = listOf(listing.beds, listing.baths, listing.sqft)
+            var textViewList = listOf(tvBedCount, tvBathCount, tvSqFt)
+            var unitList = listOf("bds", "ba", "sqft")
+
+            for (i in 0 until parameterList.size) {
+                if (parameterList[i] == -1) {
+                    textViewList[i].text = unitList[i] + "N/A"
+                }
+            }
+
         }
 
-        override fun onClick(v: View?) {
+        override fun onLongClick(v: View): Boolean {
             // 1. Get notified of the particular movie which was clicked
             val listing = listings[adapterPosition]
 
             // 2. Use the intent system to navigate to the new activity
             sharedViewModel.saveListing(listings[adapterPosition])
+            return true
         }
 
         private fun saveToWishlist() {
