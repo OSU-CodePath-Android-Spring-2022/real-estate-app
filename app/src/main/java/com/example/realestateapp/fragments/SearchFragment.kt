@@ -16,8 +16,10 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.Headers
 import org.json.JSONException
+
 
 class SearchFragment : Fragment() {
     private val client = AsyncHttpClient()
@@ -71,6 +73,7 @@ class SearchFragment : Fragment() {
                     val listingJsonArray = dataJson.getJSONObject("home_search").getJSONArray("results")
                     listings.addAll(Listing.fromJsonArray(listingJsonArray))
                     sharedViewModel.saveListings(listings)
+                    sharedViewModel.onLoadSuccess()
                     Log.i(TAG, "Listing list $listings")
 
                     // Swap to results screen

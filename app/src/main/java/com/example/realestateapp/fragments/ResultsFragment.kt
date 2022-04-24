@@ -1,12 +1,12 @@
 package com.example.realestateapp.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +14,9 @@ import com.example.realestateapp.ListingAdapter
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
-import com.parse.FindCallback
-import com.parse.ParseException
-import com.parse.ParseQuery
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 class ResultsFragment : Fragment() {
 
@@ -33,6 +33,7 @@ class ResultsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_results, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<RecyclerView>(R.id.rvListings)
@@ -42,9 +43,16 @@ class ResultsFragment : Fragment() {
         rvListings.adapter = adapter
         rvListings.layoutManager = LinearLayoutManager(requireContext())
 
+        // loads from internal storage if no search has been made
+        if (sharedViewModel.initialLoad.value == true)  {
+            loadFromStorage()
+            sharedViewModel.onLoadSuccess()
+        }
+
         sharedViewModel.listings.observe(viewLifecycleOwner) { listings ->
             adapter.clear()
             adapter.addAll(listings)
+            persistToStorage(listings)
         }
 
         // For DetailFragment
@@ -52,6 +60,21 @@ class ResultsFragment : Fragment() {
             Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
             // TODO: Instead of toast, start a detail fragment displaying the currently selected listing
         }
+    }
+
+    private fun persistToStorage(listings: MutableList<Listing>?) {
+        val editor = PreferenceManager.getDefaultSharedPreferences(requireContext()).edit()
+        val gson = Gson()
+        editor.putString("results", gson.toJson(listings))
+        editor.apply()
+    }
+
+    private fun loadFromStorage() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        val gson = Gson()
+        val json = prefs.getString("results", null)
+        val itemType = object : TypeToken<MutableList<Listing>>() {}.type
+        sharedViewModel.saveListings(gson.fromJson(json, itemType))
     }
 
     companion object {

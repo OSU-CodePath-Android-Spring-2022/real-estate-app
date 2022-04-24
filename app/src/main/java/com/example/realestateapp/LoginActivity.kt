@@ -7,6 +7,10 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.preference.PreferenceManager
+import com.example.realestateapp.fragments.ResultsFragment
+import com.example.realestateapp.models.Listing
+import com.google.gson.Gson
 import com.parse.ParseUser
 
 class LoginActivity : AppCompatActivity() {
@@ -19,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.login_button).setOnClickListener {
-            val username = findViewById<EditText>(R.id.et_username).text.toString()
-            val password = findViewById<EditText>(R.id.et_password).text.toString()
+            val username = findViewById<EditText>(R.id.et_username).text.toString().trim()
+            val password = findViewById<EditText>(R.id.et_password).text.toString().trim()
             loginUser(username, password)
         }
 
@@ -30,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser (username: String, password: String) {
+        initializeStorage()
         ParseUser.logInInBackground(username, password, ({ user, e ->
             if (user != null) {
                 Log.i(TAG, "Successfully logged in")
@@ -51,6 +56,15 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this@LoginActivity, SignupActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    // creates empty internal storage file
+    private fun initializeStorage() {
+        val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+        val gson = Gson()
+        val listing: MutableList<Listing> = mutableListOf()
+        editor.putString("results", gson.toJson(listing))
+        editor.apply()
     }
 
     companion object {

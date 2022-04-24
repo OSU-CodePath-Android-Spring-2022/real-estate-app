@@ -84,7 +84,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
 
             for (i in 0 until parameterList.size) {
                 if (parameterList[i] == -1) {
-                    textViewList[i].text = unitList[i] + "N/A"
+                    textViewList[i].text = unitList[i] + " N/A"
                 }
             }
 
