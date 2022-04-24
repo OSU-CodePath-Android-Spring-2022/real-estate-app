@@ -44,7 +44,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
         notifyDataSetChanged()
     }
 
-    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -62,7 +62,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvAddress = itemView.findViewById(R.id.tvAddress)
 
 
-            itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
                 saveToWishlist()
@@ -79,12 +79,13 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
 
         }
 
-        override fun onClick(v: View?) {
+        override fun onLongClick(v: View): Boolean {
             // 1. Get notified of the particular movie which was clicked
             val listing = listings[adapterPosition]
 
             // 2. Use the intent system to navigate to the new activity
             sharedViewModel.saveListing(listings[adapterPosition])
+            return true
         }
 
         private fun saveToWishlist() {
