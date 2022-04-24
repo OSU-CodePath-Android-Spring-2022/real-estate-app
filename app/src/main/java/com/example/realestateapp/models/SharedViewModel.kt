@@ -17,6 +17,7 @@ class SharedViewModel: ViewModel() {
 
 
     fun saveListings(newListings: MutableList<Listing>) {
+        onLoadSuccess()
         _listings.value = newListings
     }
 

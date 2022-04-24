@@ -1,13 +1,18 @@
 package com.example.realestateapp.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestHeaders
@@ -28,6 +33,8 @@ class SearchFragment : Fragment() {
     lateinit var etState: EditText
     lateinit var etCity: EditText
     lateinit var btnSearch: Button
+    lateinit var progressBar: ProgressBar
+    lateinit var bottomNavigationView: BottomNavigationView
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -45,8 +52,13 @@ class SearchFragment : Fragment() {
         etState = view.findViewById(R.id.etState)
         etCity = view.findViewById(R.id.etCity)
         btnSearch = view.findViewById(R.id.btnSearch)
+        progressBar = view.findViewById(R.id.pbLoading)
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+
 
         btnSearch.setOnClickListener {
+            hideKeyboard()
+            progressBar.visibility = ProgressBar.VISIBLE
             getSearchResults()
         }
     }
@@ -73,13 +85,11 @@ class SearchFragment : Fragment() {
                     val listingJsonArray = dataJson.getJSONObject("home_search").getJSONArray("results")
                     listings.addAll(Listing.fromJsonArray(listingJsonArray))
                     sharedViewModel.saveListings(listings)
-                    sharedViewModel.onLoadSuccess()
-                    Log.i(TAG, "Listing list $listings")
 
                     // Swap to results screen
-                    val transaction = parentFragmentManager.beginTransaction()
-                    transaction.replace(R.id.flContainer, ResultsFragment())
-                    transaction.commit()
+                    progressBar.visibility = ProgressBar.INVISIBLE
+                    bottomNavigationView.selectedItemId = R.id.action_results
+
                 } catch (e: JSONException) {
                     Log.e(TAG, "Encountered exception $e")
                 }
@@ -91,9 +101,16 @@ class SearchFragment : Fragment() {
                 response: String?,
                 throwable: Throwable?
             ) {
+                progressBar.visibility = ProgressBar.INVISIBLE
+                Toast.makeText(requireContext(), "Failed to get results", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "onFailure $statusCode")
             }
         })
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 
     companion object {
