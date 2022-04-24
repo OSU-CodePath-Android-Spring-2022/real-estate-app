@@ -92,7 +92,7 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
 
             for (i in 0 until parameterList.size) {
                 if (parameterList[i] == -1) {
-                    textViewList[i].text = "N/A" + unitList[i]
+                    textViewList[i].text = unitList[i] + " N/A"
                 }
             }
         }

@@ -80,11 +80,11 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             // Display null data as N/A
             var parameterList = listOf(listing.beds, listing.baths, listing.sqft)
             var textViewList = listOf(tvBedCount, tvBathCount, tvSqFt)
-            var unitList = listOf(" bds", " ba", " sqft")
+            var unitList = listOf("bds", "ba", "sqft")
 
             for (i in 0 until parameterList.size) {
                 if (parameterList[i] == -1) {
-                    textViewList[i].text = "N/A" + unitList[i]
+                    textViewList[i].text = unitList[i] + "N/A"
                 }
             }
 
