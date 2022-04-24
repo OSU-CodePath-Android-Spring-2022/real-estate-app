@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.realestateapp.fragments.ResultsFragment
 import com.example.realestateapp.fragments.SearchFragment
 import com.example.realestateapp.fragments.WishlistFragment

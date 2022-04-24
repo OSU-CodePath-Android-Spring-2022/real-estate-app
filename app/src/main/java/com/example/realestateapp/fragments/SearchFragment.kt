@@ -2,12 +2,13 @@ package com.example.realestateapp.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestHeaders
@@ -16,7 +17,6 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.Headers
 import org.json.JSONException
 
@@ -28,6 +28,7 @@ class SearchFragment : Fragment() {
     lateinit var etState: EditText
     lateinit var etCity: EditText
     lateinit var btnSearch: Button
+    lateinit var progressBar: ProgressBar
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -45,8 +46,10 @@ class SearchFragment : Fragment() {
         etState = view.findViewById(R.id.etState)
         etCity = view.findViewById(R.id.etCity)
         btnSearch = view.findViewById(R.id.btnSearch)
+        progressBar = view.findViewById(R.id.pbLoading)
 
         btnSearch.setOnClickListener {
+            progressBar.visibility = ProgressBar.VISIBLE
             getSearchResults()
         }
     }
@@ -73,8 +76,7 @@ class SearchFragment : Fragment() {
                     val listingJsonArray = dataJson.getJSONObject("home_search").getJSONArray("results")
                     listings.addAll(Listing.fromJsonArray(listingJsonArray))
                     sharedViewModel.saveListings(listings)
-                    sharedViewModel.onLoadSuccess()
-                    Log.i(TAG, "Listing list $listings")
+                    progressBar.visibility = ProgressBar.INVISIBLE
 
                     // Swap to results screen
                     val transaction = parentFragmentManager.beginTransaction()
