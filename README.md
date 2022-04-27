@@ -58,7 +58,17 @@ Android mobile application that will allow users to sign in to an account and th
 **Optional Nice-to-have Stories**
 
 - [ ] Users are able to add comments about a listing in a comment box.
-- [ ] When viewing the details for a listing, user is able to be redirected to the listing agents website so that they may contact them about listing.
+- [ ] When viewing the details for a listing, user is able to be redirected to the listing agents website so that they may contact them about listing. 
+- [x] Users can hold down a Listing to open the pinned location in Google Maps.
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/gmaps-persistence.gif' title='Signup Video' width=''>
+      </details>
+- [x] Most recent search results persist in local storage across app restarts until logging out.
+      <details>
+        <summary>Video Walkthrough</summary>
+          <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/gmaps-persistence.gif' title='Signup Video' width=''>
+      </details>
 
 ### 2. Screen Archetypes
 
