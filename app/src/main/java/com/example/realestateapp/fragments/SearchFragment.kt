@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.codepath.asynchttpclient.AsyncHttpClient
@@ -54,7 +53,6 @@ class SearchFragment : Fragment() {
         btnSearch = view.findViewById(R.id.btnSearch)
         progressBar = view.findViewById(R.id.pbLoading)
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-
 
         btnSearch.setOnClickListener {
             hideKeyboard()

@@ -5,6 +5,7 @@ import androidx.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,6 +25,7 @@ class ResultsFragment : Fragment() {
     lateinit var adapter: ListingAdapter
     var allListings: MutableList<Listing> = mutableListOf()
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    lateinit var flContainer: FrameLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +44,7 @@ class ResultsFragment : Fragment() {
         adapter = ListingAdapter(requireContext(), allListings, sharedViewModel)
         rvListings.adapter = adapter
         rvListings.layoutManager = LinearLayoutManager(requireContext())
+        flContainer = requireActivity().findViewById(R.id.flContainer)
 
         // loads from internal storage if no search has been made
         if (sharedViewModel.initialLoad.value == true)  {
@@ -59,6 +62,7 @@ class ResultsFragment : Fragment() {
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
             Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
             // TODO: Instead of toast, start a detail fragment displaying the currently selected listing
+            getParentFragmentManager().beginTransaction().replace(R.id.flContainer, DetailsFragment()).commit()
         }
     }
 
