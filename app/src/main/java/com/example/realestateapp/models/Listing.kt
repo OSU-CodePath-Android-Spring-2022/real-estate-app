@@ -52,7 +52,7 @@ data class Listing(
                 addressJson.getString("postal_code"),
                 addressJson.getString("city"),
                 addressJson.getString("state_code"),
-                addressJson.getString("line")
+                addressJson.getString("line"),
             )
         }
 
