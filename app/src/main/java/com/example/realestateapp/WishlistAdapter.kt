@@ -1,8 +1,10 @@
 package com.example.realestateapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +53,7 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
     }
 
     open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnLongClickListener {
+        View.OnLongClickListener, View.OnClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -70,6 +72,8 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
 
 
             itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
+
             btnRemove = itemView.findViewById(R.id.btnRemove)
             btnRemove.setOnClickListener {
                 removeFromWishlist()
@@ -97,12 +101,29 @@ open class WishlistAdapter(val context: Context, val listings: MutableList<Listi
             }
         }
 
-        override fun onLongClick(v: View): Boolean {
-            // 1. Get notified of the particular movie which was clicked
+        override fun onClick(view: View?) {
+            sharedViewModel.saveListing(listings[adapterPosition])
+        }
+
+        override fun onLongClick(view: View): Boolean {
+            // 1. Get notified of the particular listing which was clicked
             val listing = listings[adapterPosition]
+            val address = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode} ${listing.postalCode}"
 
             // 2. Use the intent system to navigate to the new activity
-            sharedViewModel.saveListing(listings[adapterPosition])
+            val intentUri = Uri.Builder().apply {
+                scheme("https")
+                authority("www.google.com")
+                appendPath("maps")
+                appendPath("search")
+                appendPath("")
+                appendQueryParameter("api", "1")
+                appendQueryParameter("query", address)
+            }.build()
+            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = intentUri
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+            })
             return true
         }
 
