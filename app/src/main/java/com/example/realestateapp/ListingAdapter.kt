@@ -12,11 +12,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.*
+import com.parse.Parse.getApplicationContext
+import org.json.JSONArray
 import java.util.*
 
 
@@ -126,6 +130,21 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             val savedIds = mutableListOf<String>()
             val query: ParseQuery<ParseObject> = ParseQuery.getQuery("Listing")
             val user = ParseUser.getCurrentUser()
+            val wishlistJson = user.getJSONArray("wishlist")
+            var inWishlist = false
+            if (wishlistJson != null) {
+                for (i in 0 until wishlistJson.length()) {
+                    if (wishlistJson.getString(i) == listingId) {
+                        Toast.makeText(getApplicationContext(), "Listing is Already in Wishlist!", Toast.LENGTH_SHORT).show()
+                        inWishlist = true
+                    }
+                }
+                if (!inWishlist) {
+                    Toast.makeText(getApplicationContext(), "Listing Saved to Wishlist!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Listing Saved to Wishlist!", Toast.LENGTH_SHORT).show()
+            }
             user.addAllUnique("wishlist", Arrays.asList(listingId))
             user.saveInBackground()
             query.findInBackground(object : FindCallback<ParseObject> {
@@ -139,7 +158,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
                             }
                             Log.i("savedListings", savedIds.toString())
                         }
-                        if (listingId in savedIds != true) {
+                        if (!(listingId in savedIds)) {
                             saveParseObject(property)
                         }
                     }
@@ -166,10 +185,10 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             parseListing.put("streetAddr", property.streetAddr)
             parseListing.saveInBackground {exception ->
                 if (exception != null) {
-                    Log.e("saving", "Error while saving post")
+                    Log.e("saving", "Error while saving listing")
                     exception.printStackTrace()
                 } else {
-                    Log.i("saving", "Successfully saved post")
+                    Log.i("saving", "Successfully saved listing")
                 }
             }
         }
