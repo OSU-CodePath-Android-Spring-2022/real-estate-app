@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.example.realestateapp.fragments.ResultsFragment
@@ -28,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
             loginUser(username, password)
         }
 
-        findViewById<Button>(R.id.to_signup).setOnClickListener {
+        findViewById<TextView>(R.id.to_signup).setOnClickListener {
             goToSignupActivity()
         }
     }
