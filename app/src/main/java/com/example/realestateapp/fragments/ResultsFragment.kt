@@ -61,8 +61,7 @@ class ResultsFragment : Fragment() {
         // For DetailFragment
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
             Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
-            // TODO: Instead of toast, start a detail fragment displaying the currently selected listing
-            getParentFragmentManager().beginTransaction().replace(R.id.flContainer, DetailsFragment()).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.flContainer, DetailsFragment()).commit()
         }
     }
 

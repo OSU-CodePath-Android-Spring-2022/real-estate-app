@@ -1,8 +1,10 @@
 package com.example.realestateapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +12,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.*
+import java.net.URI
+import java.net.URLEncoder.encode
 import java.util.*
+
 
 open class ListingAdapter(val context: Context, val listings: MutableList<Listing>, val sharedViewModel: SharedViewModel)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
@@ -75,7 +81,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvBedCount.text = listing.beds.toString() + " bds"
             tvBathCount.text = listing.baths.toString() + " ba"
             tvSqFt.text = listing.sqft.toString() + " sqft"
-            tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
+            tvAddress.text = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode}"
 
             // Display null data as N/A
             val parameterList = listOf(listing.beds, listing.baths, listing.sqft)
@@ -91,11 +97,23 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
         }
 
         override fun onLongClick(v: View): Boolean {
-            // 1. Get notified of the particular movie which was clicked
+            // 1. Get notified of the particular listing which was clicked
             val listing = listings[adapterPosition]
+            val address = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode} ${listing.postalCode}"
 
             // 2. Use the intent system to navigate to the new activity
-            sharedViewModel.saveListing(listings[adapterPosition])
+            val intentUri = Uri.Builder().apply {
+                scheme("https")
+                authority("www.google.com")
+                appendPath("maps")
+                appendPath("search")
+                appendPath("")
+                appendQueryParameter("api", "1")
+                appendQueryParameter("query", address)
+            }.build()
+            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = intentUri
+            })
             return true
         }
 
