@@ -12,14 +12,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.*
-import java.net.URI
-import java.net.URLEncoder.encode
 import java.util.*
 
 
@@ -50,7 +47,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
         notifyDataSetChanged()
     }
 
-    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener {
+    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener, View.OnClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -68,6 +65,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvAddress = itemView.findViewById(R.id.tvAddress)
 
             itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
 
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
@@ -96,7 +94,11 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
 
         }
 
-        override fun onLongClick(v: View): Boolean {
+        override fun onClick(view: View?) {
+            sharedViewModel.saveListing(listings[adapterPosition])
+        }
+
+        override fun onLongClick(view: View): Boolean {
             // 1. Get notified of the particular listing which was clicked
             val listing = listings[adapterPosition]
             val address = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode} ${listing.postalCode}"
@@ -113,6 +115,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             }.build()
             context.startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = intentUri
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
             })
             return true
         }
