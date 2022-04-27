@@ -1,8 +1,10 @@
 package com.example.realestateapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
 import com.parse.*
 import java.util.*
+
 
 open class ListingAdapter(val context: Context, val listings: MutableList<Listing>, val sharedViewModel: SharedViewModel)
     : RecyclerView.Adapter<ListingAdapter.ViewHolder>() {
@@ -44,7 +47,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
         notifyDataSetChanged()
     }
 
-    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener {
+    open inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnLongClickListener, View.OnClickListener {
         val ivListingPhoto: ImageView
         val tvPrice: TextView
         val tvBedCount: TextView
@@ -62,6 +65,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvAddress = itemView.findViewById(R.id.tvAddress)
 
             itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
 
             btnSave = itemView.findViewById(R.id.btnSave)
             btnSave.setOnClickListener {
@@ -75,7 +79,7 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
             tvBedCount.text = listing.beds.toString() + " bds"
             tvBathCount.text = listing.baths.toString() + " ba"
             tvSqFt.text = listing.sqft.toString() + " sqft"
-            tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode
+            tvAddress.text = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode}"
 
             // Display null data as N/A
             val parameterList = listOf(listing.beds, listing.baths, listing.sqft)
@@ -90,12 +94,29 @@ open class ListingAdapter(val context: Context, val listings: MutableList<Listin
 
         }
 
-        override fun onLongClick(v: View): Boolean {
-            // 1. Get notified of the particular movie which was clicked
+        override fun onClick(view: View?) {
+            sharedViewModel.saveListing(listings[adapterPosition])
+        }
+
+        override fun onLongClick(view: View): Boolean {
+            // 1. Get notified of the particular listing which was clicked
             val listing = listings[adapterPosition]
+            val address = "${listing.streetAddr}, ${listing.city}, ${listing.stateCode} ${listing.postalCode}"
 
             // 2. Use the intent system to navigate to the new activity
-            sharedViewModel.saveListing(listings[adapterPosition])
+            val intentUri = Uri.Builder().apply {
+                scheme("https")
+                authority("www.google.com")
+                appendPath("maps")
+                appendPath("search")
+                appendPath("")
+                appendQueryParameter("api", "1")
+                appendQueryParameter("query", address)
+            }.build()
+            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = intentUri
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+            })
             return true
         }
 

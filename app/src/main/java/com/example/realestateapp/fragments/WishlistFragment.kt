@@ -81,7 +81,7 @@ class WishlistFragment : Fragment() {
         val city = listing.getString("city").toString()
         val stateCode = listing.getString("stateCode").toString()
         val streetAddr = listing.getString("streetAddr").toString()
-        val convertedListing = Listing(propertyID, listPrice, primaryPhoto, photos, yearBuilt, baths, stories, beds, sqft, lotSqft, type, postalCode, city, stateCode, streetAddr )
+        val convertedListing = Listing(propertyID, listPrice, primaryPhoto, photos, yearBuilt, baths, stories, beds, sqft, lotSqft, type, postalCode, city, stateCode, streetAddr)
         return convertedListing
     }
 
