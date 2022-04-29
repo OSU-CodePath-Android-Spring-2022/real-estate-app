@@ -18,19 +18,20 @@
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:textSize="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PhotoScroll"
+        app:layout_constraintTop_toBottomOf="@+id/MainPhoto"
         tools:text="$599,000" />
 
     <TextView
         android:id="@+id/tvBedRooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:textSize="36dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvBathRooms"
         app:layout_constraintStart_toEndOf="@+id/tvPrice"
-        app:layout_constraintTop_toBottomOf="@+id/PhotoScroll"
+        app:layout_constraintTop_toBottomOf="@+id/MainPhoto"
         tools:text="3 Bed" />
 
     <TextView
@@ -39,8 +40,9 @@
         android:layout_height="wrap_content"
         android:textSize="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tvBedRooms"
-        app:layout_constraintTop_toBottomOf="@+id/PhotoScroll"
+        app:layout_constraintTop_toBottomOf="@+id/MainPhoto"
         tools:text="2.5 Bath" />
 
     <TextView
@@ -49,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBedRooms"
         tools:text="This will contain lots and lots and lots and lots and lots and lots and lots and lots and lots  and lots and lots and lots and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots of info." />
@@ -62,12 +64,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_off" />
 
-    <LinearLayout
-        android:id="@+id/PhotoScroll"
-        android:layout_width="409dp"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="200dp"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,7 +60,7 @@ class ResultsFragment : Fragment() {
 
         // For DetailFragment
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
-            Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
             parentFragmentManager.beginTransaction().replace(R.id.flContainer, DetailsFragment()).commit()
         }
     }
