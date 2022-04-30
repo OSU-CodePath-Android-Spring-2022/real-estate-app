@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Real Estate App</string>
     <string name="search_text">Enter an address below:</string>
-    <string name="search_button">Search Homes</string>
+    <string name="search_button">Search for Houses</string>
 
     <string name="rapid_api_endpoint">https://us-real-estate.p.rapidapi.com/v2/for-sale</string>
     <string name="rapid_api_host">us-real-estate.p.rapidapi.com</string>

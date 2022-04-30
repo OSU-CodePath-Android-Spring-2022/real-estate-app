@@ -35,8 +35,8 @@
         android:id="@+id/etState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="60dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="60dp"
         android:width="80dp"
         android:ems="10"
         android:hint="state"
@@ -51,9 +51,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:width="200dp"
-        android:textColor="@color/gray"
+        android:width="250dp"
         android:text="@string/search_button"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,9 +64,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textNoAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch" />
+
+    <TextView
+        android:id="@+id/textNoAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have a location in mind?"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/blue_1"
+        app:layout_constraintBottom_toTopOf="@+id/btnNearby"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnNearby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:text="Hunt Nearby"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

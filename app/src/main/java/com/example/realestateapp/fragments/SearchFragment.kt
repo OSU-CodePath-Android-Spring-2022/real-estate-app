@@ -3,6 +3,7 @@ package com.example.realestateapp.fragments
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -30,6 +31,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.Headers
 import org.json.JSONException
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class SearchFragment : Fragment() {
@@ -39,6 +42,7 @@ class SearchFragment : Fragment() {
     lateinit var etState: EditText
     lateinit var etCity: EditText
     lateinit var btnSearch: Button
+    lateinit var btnNearby: Button
     lateinit var progressBar: ProgressBar
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -63,27 +67,35 @@ class SearchFragment : Fragment() {
         etState = view.findViewById(R.id.etState)
         etCity = view.findViewById(R.id.etCity)
         btnSearch = view.findViewById(R.id.btnSearch)
+        btnNearby = view.findViewById(R.id.btnNearby)
+
         progressBar = view.findViewById(R.id.pbLoading)
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         geocoder = Geocoder(requireContext())
 
+        btnNearby.setOnClickListener {
+            hideKeyboard()
+            progressBar.visibility = ProgressBar.VISIBLE
+            getLocation()
+        }
+
         btnSearch.setOnClickListener {
             hideKeyboard()
             progressBar.visibility = ProgressBar.VISIBLE
-            getSearchResults()
+            getSearchResults(etCity.text.toString(), etState.text.toString())
         }
     }
 
-    private fun getSearchResults() {
+    private fun getSearchResults(city: String?, stateCode: String?) {
         val headers = RequestHeaders()
         headers.put("X-RapidAPI-Host", getString(R.string.rapid_api_host))
         headers.put("X-RapidAPI-Key", getString(R.string.rapid_api_key))
 
         val params = RequestParams()
-        params.put("city", etCity.text.toString())
-        params.put("state_code", etState.text.toString())
+        params.put("city", city)
+        params.put("state_code", stateCode)
         params.put("offset", "0")
         params.put("limit", "42")
         params.put("sort", "newest")
@@ -138,12 +150,34 @@ class SearchFragment : Fragment() {
             if(location != null) {
                 latitude = location.latitude
                 longitude = location.longitude
+
+                val address = geocoder.getFromLocation(latitude, longitude, 1)
+                if (!address.isNullOrEmpty()) {
+                    getSearchResults(address[0].locality, getStateCode(address[0]))
+                }
             }
             else {
                 Toast.makeText(requireContext(), "Location is null", Toast.LENGTH_SHORT).show()
             }
 
         }
+    }
+
+    private fun getStateCode(USAddress: Address): String? {
+        var fullAddress = ""
+        for (j in 0..USAddress.getMaxAddressLineIndex()) {
+            if (USAddress.getAddressLine(j) != null) {
+                fullAddress = fullAddress + " " + USAddress.getAddressLine(j)
+            }
+        }
+        var stateCode: String? = null
+        val pattern: Pattern = Pattern.compile(" [A-Z]{2} ")
+        val helper = fullAddress.uppercase().substring(0, fullAddress.uppercase().indexOf("USA"))
+        val matcher: Matcher = pattern.matcher(helper)
+        while (matcher.find()) {
+            stateCode = matcher.group().trim()
+        }
+        return stateCode
     }
 
     private fun hideKeyboard() {
