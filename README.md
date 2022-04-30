@@ -48,7 +48,7 @@ Android mobile application that will allow users to sign in to an account and th
         <summary>Video Walkthrough</summary>
           <img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/save-to-wishlist.gif' title='Save to Wishlist Video' width=''>
       </details>
-- [ ] Users are able to click on a listing to bring them to a new screen that contains the specific details about that property.
+- [x] Users are able to click on a listing to bring them to a new screen that contains the specific details about that property.
 - [x] Users can switch between the search, results, and wishlist tabs using fragments and a Bottom Navigation View.
       <details>
         <summary>Video Walkthrough</summary>
