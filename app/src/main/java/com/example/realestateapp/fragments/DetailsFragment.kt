@@ -29,10 +29,7 @@ class DetailsFragment: Fragment() {
     lateinit var tvSquareFoot: TextView
     lateinit var tvLotSize: TextView
     lateinit var tvHomeType: TextView
-    lateinit var tvPostCode: TextView
-    lateinit var tvStateCode: TextView
-    lateinit var tvStreetAddr: TextView
-    lateinit var tvCity: TextView
+    lateinit var tvAddress: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +43,13 @@ class DetailsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
             var ivMainPhoto = view.findViewById<ImageView>(R.id.ivMainPhoto)
-            Glide.with(view.context).load(ivMainPhoto).error(ColorDrawable(Color.LTGRAY)).into(ivMainPhoto)
+            Glide.with(view.context).load(listing.primaryPhoto).error(ColorDrawable(Color.LTGRAY)).into(ivMainPhoto)
             tvPrice = view.findViewById(R.id.tvPrice)
             tvPrice.text = "$" + listing.listPrice.toString()
             tvBedRooms = view.findViewById(R.id.tvBedRooms)
-            tvBedRooms.text = listing.beds.toString() + " Br"
+            tvBedRooms.text = listing.beds.toString() + " bds"
             tvBathRooms = view.findViewById(R.id.tvBathRooms)
-            tvBathRooms.text = listing.baths.toString() + " Ba"
+            tvBathRooms.text = listing.baths.toString() + " ba"
             tvPropertyID = view.findViewById(R.id.tvPropertyID)
             tvPropertyID.text = "Listing ID: " + listing.propertyID.toString()
             tvYearBuilt = view.findViewById(R.id.tvYearBuilt)
@@ -63,16 +60,10 @@ class DetailsFragment: Fragment() {
             tvLotSize.text = "Lot Size: " + listing.lotSqft.toString()
             tvHomeType = view.findViewById(R.id.tvHomeType)
             tvHomeType.text = "Home Type: " + listing.type.toString()
-            tvPostCode = view.findViewById(R.id.tvPostCode)
-            tvPostCode.text = listing.postalCode.toString()
-            tvStateCode = view.findViewById(R.id.tvStateCode)
-            tvStateCode.text = listing.stateCode.toString()
-            tvStreetAddr = view.findViewById(R.id.tvStreetAddr)
-            tvStreetAddr.text = listing.streetAddr.toString()
-            tvCity = view.findViewById(R.id.tvCity)
-            tvCity.text = listing.city.toString()
+            tvAddress = view.findViewById(R.id.tvAddress)
+            tvAddress.text = listing.streetAddr + ", " + listing.city + ", " + listing.stateCode + " " + listing.postalCode
         }
-//        var closeBtn = view.findViewById<ImageButton>(R.id.closeBtn)
+        var closeBtn = view.findViewById<ImageButton>(R.id.closeBtn)
 //        closeBtn.setOnClickListener(closeDetails())
     }
 
