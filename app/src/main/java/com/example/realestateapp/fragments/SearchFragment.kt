@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -76,19 +77,18 @@ class SearchFragment : Fragment() {
         geocoder = Geocoder(requireContext())
 
         btnNearby.setOnClickListener {
-            hideKeyboard()
-            progressBar.visibility = ProgressBar.VISIBLE
             getLocation()
         }
 
         btnSearch.setOnClickListener {
-            hideKeyboard()
-            progressBar.visibility = ProgressBar.VISIBLE
             getSearchResults(etCity.text.toString(), etState.text.toString())
         }
     }
 
     private fun getSearchResults(city: String?, stateCode: String?) {
+        hideKeyboard()
+        progressBar.visibility = ProgressBar.VISIBLE
+
         val headers = RequestHeaders()
         headers.put("X-RapidAPI-Host", getString(R.string.rapid_api_host))
         headers.put("X-RapidAPI-Key", getString(R.string.rapid_api_key))
