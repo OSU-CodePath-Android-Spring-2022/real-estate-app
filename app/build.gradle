@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.codepath.libraries:asynchttpclient:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.preference:preference:1.2.0'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     // design
     implementation 'androidx.cardview:cardview:1.0.0'
