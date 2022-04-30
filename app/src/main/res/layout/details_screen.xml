@@ -45,17 +45,6 @@
         app:layout_constraintTop_toBottomOf="@+id/MainPhoto"
         tools:text="2.5 Bath" />
 
-    <TextView
-        android:id="@+id/tvAdditionalInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBedRooms"
-        tools:text="This will contain lots and lots and lots and lots and lots and lots and lots and lots and lots  and lots and lots and lots and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots and lots  and lots of info." />
-
     <ImageButton
         android:id="@+id/FavBtn"
         android:layout_width="wrap_content"
@@ -63,6 +52,78 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_off" />
+
+    <TextView
+        android:id="@+id/tvPropertyID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+    <TextView
+        android:id="@+id/tvYearBuilt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPropertyID" />
+
+    <TextView
+        android:id="@+id/tvSquareFoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvYearBuilt" />
+
+    <TextView
+        android:id="@+id/tvLotSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSquareFoot" />
+
+    <TextView
+        android:id="@+id/tvHomeType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLotSize" />
+
+    <TextView
+        android:id="@+id/tvPostCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStateCode" />
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStreetAddr" />
+
+    <TextView
+        android:id="@+id/tvStateCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCity" />
+
+    <TextView
+        android:id="@+id/tvStreetAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeType" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
