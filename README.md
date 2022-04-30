@@ -240,6 +240,10 @@ Sprint-2 Build Progress:
 
 GIF created with [LICEcap](https://www.cockos.com/licecap/).
 
+Sprint-3 Build Progress:
+
+<img src='https://github.com/OSU-CodePath-Android-Spring-2022/real-estate-app/blob/main/demos/sprint-3.gif' title='Signup Video' width=''>
+
 ## Open-source libraries used
 
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
