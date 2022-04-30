@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +62,12 @@ class ResultsFragment : Fragment() {
         // For DetailFragment
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
             //Toast.makeText(context, "${listing}", Toast.LENGTH_SHORT).show()
-            parentFragmentManager.beginTransaction().replace(R.id.flContainer, DetailsFragment()).commit()
+            var transaction = parentFragmentManager.beginTransaction()
+            transaction.add(R.id.flContainer, DetailsFragment())
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            transaction.addToBackStack(null)
+            transaction.hide(this)
+            transaction.commit()
         }
     }
 

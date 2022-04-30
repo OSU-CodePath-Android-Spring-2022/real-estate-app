@@ -1,13 +1,17 @@
 package com.example.realestateapp.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.example.realestateapp.R
 import com.example.realestateapp.models.SharedViewModel
 import java.util.*
@@ -20,7 +24,7 @@ class DetailsFragment: Fragment() {
     lateinit var tvBedRooms: TextView
     lateinit var tvBathRooms: TextView
     lateinit var tvPropertyID: TextView
-    lateinit var MainPhoto: ImageView
+    lateinit var ivMainPhoto: ImageView
     lateinit var tvYearBuilt: TextView
     lateinit var tvSquareFoot: TextView
     lateinit var tvLotSize: TextView
@@ -30,19 +34,19 @@ class DetailsFragment: Fragment() {
     lateinit var tvStreetAddr: TextView
     lateinit var tvCity: TextView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // inflate the layout for the details fragment
-        return inflater.inflate(R.layout.details_screen, container, false)
+        return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.listing.observe(viewLifecycleOwner) { listing ->
-            MainPhoto = view.findViewById(R.id.MainPhoto)
+            var ivMainPhoto = view.findViewById<ImageView>(R.id.ivMainPhoto)
+            Glide.with(view.context).load(ivMainPhoto).error(ColorDrawable(Color.LTGRAY)).into(ivMainPhoto)
             tvPrice = view.findViewById(R.id.tvPrice)
             tvPrice.text = "$" + listing.listPrice.toString()
             tvBedRooms = view.findViewById(R.id.tvBedRooms)
@@ -67,8 +71,13 @@ class DetailsFragment: Fragment() {
             tvStreetAddr.text = listing.streetAddr.toString()
             tvCity = view.findViewById(R.id.tvCity)
             tvCity.text = listing.city.toString()
-
-
         }
+//        var closeBtn = view.findViewById<ImageButton>(R.id.closeBtn)
+//        closeBtn.setOnClickListener(closeDetails())
+    }
+
+    private fun closeDetails(): View.OnClickListener? {
+        parentFragmentManager.popBackStack()
+        return null
     }
 }
