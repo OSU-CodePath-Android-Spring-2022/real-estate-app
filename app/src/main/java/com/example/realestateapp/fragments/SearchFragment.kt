@@ -1,6 +1,10 @@
 package com.example.realestateapp.fragments
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.codepath.asynchttpclient.AsyncHttpClient
@@ -20,6 +25,8 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.realestateapp.R
 import com.example.realestateapp.models.Listing
 import com.example.realestateapp.models.SharedViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.Headers
 import org.json.JSONException
@@ -35,7 +42,12 @@ class SearchFragment : Fragment() {
     lateinit var progressBar: ProgressBar
     lateinit var bottomNavigationView: BottomNavigationView
 
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var geocoder: Geocoder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +65,9 @@ class SearchFragment : Fragment() {
         btnSearch = view.findViewById(R.id.btnSearch)
         progressBar = view.findViewById(R.id.pbLoading)
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        geocoder = Geocoder(requireContext())
 
         btnSearch.setOnClickListener {
             hideKeyboard()
@@ -104,6 +119,31 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "onFailure $statusCode")
             }
         })
+    }
+
+    private fun getLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(requireContext(), "Location permission not granted", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if(location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+            }
+            else {
+                Toast.makeText(requireContext(), "Location is null", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
     private fun hideKeyboard() {
