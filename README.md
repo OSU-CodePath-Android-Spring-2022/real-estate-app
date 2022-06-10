@@ -1,7 +1,4 @@
-Original App Design Project - README Template
-===
-
-# Real Estate App (temp title)
+# HouseHunter
 
 ## Table of Contents
 1. [Overview](#Overview)
